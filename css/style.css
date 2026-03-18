@@ -1,9 +1,4 @@
-/* ==============================
-   1) 전역 기본 스타일
-   - 브라우저 기본 여백 제거
-   - box-sizing 통일
-   - 기본 폰트 지정
-================================ */
+/* 기본 스타일 초기화 */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,7 +6,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* 페이지 전체 배경/기본 텍스트 스타일 */
 body {
     background-color: #f4f7f6;
     color: #333;
@@ -19,7 +13,6 @@ body {
     padding: 20px;
 }
 
-/* 메인 컨테이너: 중앙 정렬 카드형 레이아웃 */
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -29,30 +22,24 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* 상단 타이틀 영역 */
 header {
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* 페이지 메인 제목 */
 h1 {
     color: #2c3e50;
     font-size: 2rem;
     font-weight: 700;
 }
 
-/* ==============================
-   2) 탭 내비게이션
-   - 부서/직원 화면 전환 버튼 스타일
-================================ */
+/* 탭 내비게이션 스타일 */
 .tabs {
     display: flex;
     border-bottom: 2px solid #eee;
     margin-bottom: 30px;
 }
 
-/* 기본 탭 버튼 */
 .tab-button {
     padding: 12px 24px;
     border: none;
@@ -66,41 +53,32 @@ h1 {
     margin-bottom: -2px;
 }
 
-/* 선택(활성) 탭 버튼 */
 .tab-button.active {
     color: #3498db;
     border-bottom: 3px solid #3498db;
 }
 
-/* 비활성 탭 호버 효과 */
 .tab-button:hover:not(.active) {
     color: #34495e;
     background-color: #f9f9f9;
 }
 
-/* ==============================
-   3) 섹션 표시/숨김 + 전환 애니메이션
-================================ */
+/* 섹션 표시/숨김 */
 .content-section {
     display: none;
     animation: fadeIn 0.5s;
 }
 
-/* 활성 섹션만 화면에 표시 */
 .content-section.active {
     display: block;
 }
 
-/* 섹션 전환 시 부드러운 페이드 인 */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==============================
-   4) 카드/폼 공통 스타일
-================================ */
-/* 콘텐츠 블록 카드 */
+/* 공통 폼 스타일 */
 .card {
     background: #fff;
     border: 1px solid #e1e4e8;
@@ -109,7 +87,6 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* 카드 제목 */
 .card h3 {
     margin-bottom: 20px;
     color: #2c3e50;
@@ -118,21 +95,18 @@ h1 {
     padding-left: 12px;
 }
 
-/* 입력 그룹(라벨 + 입력요소) */
 .form-group {
     margin-bottom: 15px;
     flex: 1;
 }
 
-/* 한 줄 배치 폼(반응형 줄바꿈 허용) */
 .form-inline {
     display: flex;
     gap: 15px;
-    align-items: flex-end;
+    align-items: baseline;
     flex-wrap: wrap;
 }
 
-/* 공통 라벨 */
 label {
     display: block;
     margin-bottom: 6px;
@@ -141,39 +115,61 @@ label {
     color: #555;
 }
 
-/* 텍스트 계열 입력 필드 공통 */
 input[type="text"],
 input[type="number"],
 input[type="email"],
-textarea {
+textarea,
+select {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 0.95rem;
     transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: white; /* 모든 폼 요소의 배경색 통일 */
 }
 
-/* 입력 포커스 시 강조 */
+/* select 태그에만 화살표 아이콘 스타일 적용 */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px; /* 화살표 공간 확보 */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.65em auto;
+}
+
+/* select 태그는 placeholder를 지원하지 않으므로, 첫 옵션에 대한 특별 스타일 */
+select:required:invalid {
+    color: #666;
+}
+option[value=""] {
+    color: #999;
+}
+option {
+    color: #333;
+}
+
+
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="email"]:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     border-color: #3498db;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
     outline: none;
 }
 
-/* 가로 폼 내 최소 너비 보장 */
 .form-inline .form-group {
     min-width: 200px;
 }
 
-/* ==============================
-   5) 버튼 스타일
-   - 공통 버튼 + 색상 변형
-================================ */
-/* 버튼 공통 베이스 */
+/* 버튼 스타일 */
+
+
 .btn {
     padding: 12px 22px;
     border: none;
@@ -185,13 +181,11 @@ textarea:focus {
     white-space: nowrap;
 }
 
-/* 버튼 호버 공통 효과 */
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* 주요 동작 버튼 색상 변형 */
 .btn-primary { background-color: #3498db; color: white; }
 .btn-primary:hover { background-color: #2980b9; }
 
@@ -207,10 +201,10 @@ textarea:focus {
 .btn-info { background-color: #17a2b8; color: white; }
 .btn-info:hover { background-color: #138496; }
 
-/* ==============================
-    6) 목록/테이블 스타일
-================================ */
-/* 테이블 상단(제목 + 액션 버튼) */
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-secondary:hover { background-color: #5a6268; }
+
+/* 테이블 스타일 */
 .list-header {
     display: flex;
     justify-content: space-between;
@@ -218,14 +212,12 @@ textarea:focus {
     margin-bottom: 10px;
 }
 
-/* 데이터 테이블 기본 */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
 }
 
-/* 셀 공통 */
 th, td {
     text-align: left;
     padding: 14px 16px;
@@ -233,7 +225,6 @@ th, td {
     vertical-align: middle;
 }
 
-/* 헤더 셀 */
 th {
     background-color: #f8f9fa;
     color: #2c3e50;
@@ -241,21 +232,16 @@ th {
     font-size: 0.9rem;
 }
 
-/* 행 호버 효과 */
 tr:hover {
     background-color: #f9f9f9;
 }
 
-/* 행 내 액션 버튼 그룹 */
 .actions {
     display: flex;
     gap: 8px;
 }
 
-/* ==============================
-   7) 우측 상단 알림 토스트
-================================ */
-/* 알림 컨테이너(화면 고정) */
+/* 메시지 알림 스타일 */
 #message-area {
     position: fixed;
     top: 20px;
@@ -264,7 +250,6 @@ tr:hover {
     width: 300px;
 }
 
-/* 개별 알림 박스(기본 숨김) */
 .alert {
     padding: 15px 25px;
     border-radius: 5px;
@@ -277,20 +262,16 @@ tr:hover {
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* 알림 표시 상태 */
 .alert.show {
     display: block;
     opacity: 1;
     transform: translateX(0);
 }
 
-/* 알림 타입별 색상 */
 .alert-success { background-color: #2ecc71; }
 .alert-error { background-color: #e74c3c; }
 
-/* ==============================
-   8) 로딩 메시지
-================================ */
+/* 로딩 스타일 */
 .loading {
     display: none;
     text-align: center;
