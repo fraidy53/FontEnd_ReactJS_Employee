@@ -4,31 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee & Department Manager</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- 공통 스타일시트 로드 -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- 메시지 표시 영역 -->
+    <!-- ==============================
+         전역 알림(토스트) 표시 영역
+         - 성공/오류 메시지를 우측 상단에 표시
+    ============================== -->
     <div id="message-area">
         <div id="alert-success" class="alert alert-success">성공 메시지</div>
         <div id="alert-error" class="alert alert-error">오류 메시지</div>
     </div>
 
+    <!-- 메인 앱 컨테이너 -->
     <div class="container">
         <header>
+            <!-- 페이지 메인 타이틀 -->
             <h1>Employee & Department Manager</h1>
         </header>
 
-        <!-- 탭 메뉴 -->
+        <!-- ==============================
+             상단 탭 메뉴
+             - showTab('dept-section'): 부서 섹션 활성화
+             - showTab('emp-section'): 직원 섹션 활성화
+        ============================== -->
         <nav class="tabs">
             <button class="tab-button active" onclick="showTab('dept-section')">부서 관리 (Department)</button>
             <button class="tab-button" onclick="showTab('emp-section')">직원 관리 (Employee)</button>
         </nav>
 
-        <!-- 부서 관리 섹션 (P1-1 집중 구현 영역) -->
+        <!-- ==============================
+             부서 관리 섹션 (현재 활성 기본 화면)
+             P1-1 범위: 생성/조회/목록/수정/삭제 UI
+        ============================== -->
         <section id="dept-section" class="content-section active">
             
-            <!-- 부서 생성/수정 폼 -->
+            <!-- 부서 생성/수정 폼
+                 - 숨김 필드(dept-id): 수정 모드에서 대상 ID 보관 -->
             <div class="card">
                 <h3 id="dept-form-title">부서 등록</h3>
                 <form id="dept-form">
@@ -48,7 +62,7 @@
                 </form>
             </div>
 
-            <!-- 부서 단건 조회 -->
+            <!-- 부서 단건 조회 영역(ID 기반) -->
             <div class="card">
                 <h3>부서 조회 (ID)</h3>
                 <div class="form-inline">
@@ -56,16 +70,17 @@
                     <button type="button" class="btn btn-success">조회</button>
                 </div>
                 <div id="dept-detail-result" style="margin-top: 15px; display: none;">
-                    <!-- 조회 결과가 여기에 표시됨 -->
+                    <!-- 조회 성공 시 상세 결과 렌더링 영역 -->
                 </div>
             </div>
 
-            <!-- 부서 목록 -->
+            <!-- 전체 부서 목록 영역 -->
             <div class="card">
                 <div class="list-header">
                     <h3>전체 부서 목록</h3>
                     <button class="btn btn-info">새로고침</button>
                 </div>
+                <!-- API 요청 중 표시되는 로딩 텍스트 -->
                 <div class="loading" id="dept-loading">데이터를 불러오는 중...</div>
                 <table>
                     <thead>
@@ -77,7 +92,8 @@
                         </tr>
                     </thead>
                     <tbody id="dept-list">
-                        <!-- API 데이터가 여기에 렌더링됨 -->
+                        <!-- 실제 연동 시 API 데이터가 동적으로 렌더링됨 -->
+                        <!-- 현재는 화면 확인을 위한 샘플 행 -->
                         <tr>
                             <td>1</td>
                             <td>HR</td>
@@ -101,7 +117,7 @@
             </div>
         </section>
 
-        <!-- 직원 관리 섹션 (다음 단계 구현용) -->
+        <!-- 직원 관리 섹션 (추후 구현 예정) -->
         <section id="emp-section" class="content-section">
             <div class="card">
                 <h3>직원 관리 서비스 준비 중...</h3>
@@ -110,14 +126,22 @@
         </section>
     </div>
 
-    <!-- 나중에 기능 구현을 위한 JS 파일 링크 (지금은 비워둠) -->
+    <!-- 나중에 기능 구현을 위한 JS 파일 링크 (현재 미사용) -->
     <!-- <script src="app.js"></script> -->
     <script>
-        // 탭 전환 로직 (HTML/CSS 구조 확인용 간단한 스크립트)
+        // 탭 전환 로직
+        // sectionId로 받은 섹션만 보이도록 active 클래스를 토글한다.
         function showTab(sectionId) {
+            // 1) 모든 콘텐츠 섹션 비활성화
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+
+            // 2) 모든 탭 버튼 비활성화
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+
+            // 3) 선택한 섹션 활성화
             document.getElementById(sectionId).classList.add('active');
+
+            // 4) 클릭된 탭 버튼 활성화
             event.currentTarget.classList.add('active');
         }
     </script>
